@@ -1,9 +1,18 @@
 import "./App.css";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import BlogForm from "./components/BlogForm";
+import BlogList from "./components/BlogList";
 
 function App() {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
+     <BrowserRouter>
+     <Routes>
+      <Route path="/" element={<BlogForm/>} />
+      <Route path="/list" element={<BlogList/>} />
+      </Routes>
+      </BrowserRouter>
     </>
   );
 }
