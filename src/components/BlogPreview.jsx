@@ -3,11 +3,12 @@ import { useParams } from "react-router-dom";
 
 const BlogPreview = () => {
   const [post, setPost] = useState(null);
-  const { id } = useParams();
+  const  postId  = useParams();
   useEffect(() => {
     const fetchPostById = async () => {
       try {
-        const response = await fetch(`http://localhost:3005/fetch/${id}`);
+        const response = await fetch(`http://localhost:3005/fetch/${postId}`);
+        console.log(postId);
         if (!response.ok) {
           throw new Error('Failed to fetch post');
         }
@@ -20,7 +21,7 @@ const BlogPreview = () => {
     };
 
     fetchPostById();
-  }, [id]);
+  }, [postId]);
 
   if (!post) {
     return <div>Loading...</div>;
