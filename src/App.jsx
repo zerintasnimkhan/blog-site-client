@@ -12,7 +12,7 @@ function App() {
      <Routes>
       <Route path="/" element={<BlogForm/>} />
       <Route path="/list" element={<BlogList/>} />
-      <Route path="preview" element={<BlogPreview/>} />
+      <Route path="/preview/:postId" element={<BlogPreview/>} />
       </Routes>
       </BrowserRouter>
     </>

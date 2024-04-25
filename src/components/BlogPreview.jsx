@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 
-const BlogPreview = ({ postId }) => {
+const BlogPreview = () => {
   const [post, setPost] = useState(null);
-
+  const { postId } = useParams();
   useEffect(() => {
     const fetchPostById = async () => {
       try {
-        const response = await fetch(`/api/posts/${postId}`);
+        const response = await fetch(`http://localhost:3005/fetch/${postId}`);
         if (!response.ok) {
           throw new Error('Failed to fetch post');
         }
@@ -14,7 +15,7 @@ const BlogPreview = ({ postId }) => {
         setPost(postData);
       } catch (error) {
         console.error('Error fetching post:', error.message);
-        // Handle error, show user an error message, etc.
+       
       }
     };
 

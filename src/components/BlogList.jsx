@@ -1,11 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const BlogPostList = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     fetchPosts();
   }, []);
+  const navigate = useNavigate();
 
   const fetchPosts = async () => {
     try {
@@ -19,24 +21,43 @@ const BlogPostList = () => {
       console.error("Error fetching posts:", error.message);
     }
   };
+
+  const handlePreview = (postId) => {
+    navigate(`/preview/${postId}`);
+  };
+
   return (
     <div className="max-w-4xl mx-auto mt-8">
       <h2 className="text-2xl font-semibold mb-4">All Blog Posts</h2>
-      <ul className="divide-y divide-gray-200">
-        {posts?.map((post) => (
-          <li key={post.id} className="py-4">
-            <div className="flex space-x-3">
-              <div className="flex-1 space-y-1">
-                <div className="flex items-center justify-between">
-                  <h3 className="text-lg font-medium">{post.title}</h3>
-                  <p className="text-sm text-gray-500">Date: {post.date}</p>
-                </div>
-                <p className="text-gray-500">{post.description}</p>
-              </div>
-            </div>
-          </li>
-        ))}
-      </ul>
+      <div className="overflow-x-auto">
+        <table className="table-auto w-full">
+          <thead>
+            <tr>
+              <th className="px-4 py-2">Title</th>
+              <th className="px-4 py-2">Date</th>
+              <th className="px-4 py-2">Description</th>
+              <th className="px-4 py-2">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {posts?.map((post) => (
+              <tr key={post.id}>
+                <td className="border px-4 py-2">{post.title}</td>
+                <td className="border px-4 py-2">{post.date}</td>
+                <td className="border px-4 py-2">{post.description}</td>
+                <td className="border px-4 py-2">
+                  <button
+                    onClick={() => handlePreview(post.id)}
+                    className="text-sm text-blue-600 hover:underline"
+                  >
+                    Preview
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
