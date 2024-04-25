@@ -37,7 +37,6 @@ const BlogForm = () => {
       })
       .catch((error) => {
         console.error("Error saving post:", error.message);
-        // Handle error, show user an error message, etc.
       });
   };
 

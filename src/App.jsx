@@ -3,6 +3,7 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import BlogForm from "./components/BlogForm";
 import BlogList from "./components/BlogList";
+import BlogPreview from "./components/BlogPreview";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
      <Routes>
       <Route path="/" element={<BlogForm/>} />
       <Route path="/list" element={<BlogList/>} />
+      <Route path="preview" element={<BlogPreview/>} />
       </Routes>
       </BrowserRouter>
     </>
