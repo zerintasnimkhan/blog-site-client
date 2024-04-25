@@ -15,7 +15,9 @@ const BlogPostList = () => {
       if (!response.ok) {
         throw new Error("Failed to fetch posts");
       }
-      const data = await response.json();
+      let data = await response.json();
+      // Sort posts by date in descending order
+      data.sort((a, b) => new Date(b.date) - new Date(a.date));
       setPosts(data);
     } catch (error) {
       console.error("Error fetching posts:", error.message);
@@ -40,7 +42,9 @@ const BlogPostList = () => {
                 {post.title}
               </h3>
               <p className="text-gray-600 mb-2">{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-              <p className="text-gray-800">{post.description}</p>
+              <p className="text-gray-800">
+                  {post.description}
+                  </p>
             </div>
             <div className="p-4 bg-gray-100">
               <button
